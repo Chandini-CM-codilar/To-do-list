@@ -96,7 +96,7 @@ export default function Header({themeChange}) {
           <form onSubmit={add}>
             <input
               type="text"
-              placeholder="Currently typing..."
+              placeholder="Create a new todo..."
               onChange={setData}
             />
           </form>
