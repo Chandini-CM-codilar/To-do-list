@@ -5,18 +5,18 @@ import "../style/to_do_list.css";
 
 export default function Header({themeChange}) {
   const [data, setDataItem] = useState([]);
-  // console.log(data);
+
   const [value, setValue] = useState();
   const [currentState, setTabState] = useState("");
 
   var itemsLeft = 0;
 
-  //targeting input field
+
   const setData = (event) => {
     setValue(event.target.value);
   };
 
-  //onSubmit
+
   const add = (e) => {
     e.preventDefault();
     if(value!==""){
@@ -27,7 +27,7 @@ export default function Header({themeChange}) {
     }
     setValue(value);
   };
-  // getting data from localstorge
+ 
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem("key"));
     if (todos) {
@@ -35,12 +35,11 @@ export default function Header({themeChange}) {
     }
   }, []);
 
-  //storing data to localstorage
+
   useEffect(() => {
     localStorage.setItem("key", JSON.stringify(data));
   }, [data]);
 
-  // for toggling completed value 
   const toggleId = (id) => {
     const newid = data.map((data) =>
       data.id === id ? { ...data, completed: !data.completed } : data
@@ -49,7 +48,6 @@ export default function Header({themeChange}) {
     setDataItem(newid);
   };
 
-  // deleting a completed items
   const clearComplete = () => {
     const updatedTodos = data.filter((val) => {
       if (val.completed == false) {
@@ -59,9 +57,8 @@ export default function Header({themeChange}) {
     setDataItem(updatedTodos);
   };
  
-  //deleting items from the localstorage
   const removeItem = (id) => {
-    // console.log(id);
+ 
     const updatedTodo = data.filter((val) => {
       if (val.id !== id) {
         return val;
@@ -70,12 +67,11 @@ export default function Header({themeChange}) {
    setDataItem(updatedTodo);
   };
 
-  // to change the state
+ 
   const activeTab = (e) => {
     setTabState(e.target.textContent);
   };
 
-  //number of left items
   const leftItems = () => {
     const updatedTodos = data.filter((data) => !data.completed);
     itemsLeft = updatedTodos.length;
